@@ -52,11 +52,8 @@ function InventoryExpense(props) {
           withCredentials: true,
         });
 
-        console.log("Get All User", response);
         setInventory(response.data);
-        console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -94,7 +91,6 @@ function InventoryExpense(props) {
         </tr>
       );
     });
-  console.log(inventory);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       {editModal ? (

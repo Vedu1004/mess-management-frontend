@@ -23,7 +23,6 @@ const AddInventory = () => {
     const e2 = name === null;
     const e3 = qty > 0;
     const e4 = single_price > 0;
-    console.log(storeType);
     if (e1 || e2 || !e3 || !e4) {
       setalert({
         mode: true,

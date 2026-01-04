@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import QrReader from "react-qr-reader";
+import React, { useState } from "react";
+import { Scanner } from "@yudiel/react-qr-scanner";
 import axios from "../../Api/axios";
 import Alert from "../../Components/Alert";
 import Card from "./Card";
-// import QRCode from "qrcode";
-// import QrReader from "react-qr-reader";
 
 const QrAttendance = () => {
   const [data, setData] = useState([]);
@@ -21,15 +19,12 @@ const QrAttendance = () => {
 
   const [scanResultWebCam, setScanResultWebCam] = useState("");
 
-  const handleErrorWebCam = (error) => {
-    console.log(error);
-  };
-  const handleScanWebCam = (result) => {
-    setTimeout(() => {
-      if (result) {
+  const handleScanWebCam = (detectedCodes) => {
+    if (detectedCodes && detectedCodes.length > 0) {
+      const result = detectedCodes[0].rawValue;
+      setTimeout(() => {
         var result1 = JSON.parse(result);
         if (type === "breakfast" && result1.isTodayBreakfast) {
-          console.log(type === "breakfast" && result1.isTodayBreakfast);
           setPossible(true);
         } else {
           setPossible(false);
@@ -47,19 +42,15 @@ const QrAttendance = () => {
         setScanResultWebCam(result1);
         setIsCard(true);
         // const userId = scanResultWebCam.userId;
-        console.log(scanResultWebCam.userId);
-        // console.log(JSON.stringify(scanResultWebCam));
         try {
         } catch (error) {}
-      }
-    }, 5);
+      }, 5);
+    }
   };
 
   const takeAttendance = async (userId, planId) => {
     try {
-      console.log("Inside breakfast");
       const verifyThing = type;
-      console.log(verifyThing, userId, planId);
       const response = await axios.patch(
         `dailyentry/updateentry`,
         JSON.stringify({ userId, verifyThing, planId }),
@@ -68,8 +59,6 @@ const QrAttendance = () => {
           withCredentials: true,
         }
       );
-      console.log("See daily entry");
-      console.log(response);
       // alert(response.data.message);
       setalert({
         mode: true,
@@ -78,16 +67,12 @@ const QrAttendance = () => {
       });
     } catch (error) {
       if (!error?.response) {
-        console.log("No Server Response");
       }
       // else if(error.response?.status === 400)
       // {
 
       // }
       else {
-        // console.log("Deletion Failed");
-        console.log(error.message);
-        console.log(error.response.data.message);
         const message = error.response.data.message;
         setalert({
           mode: true,
@@ -150,20 +135,12 @@ const QrAttendance = () => {
         <div className="flex-[1] w-[500px]">
           <h3 className="h2">Qr Code Scan by Web Cam</h3>
 
-          <QrReader
-            delay={300}
-            style={{ width: "400px", heigth: "400px" }}
-            onError={handleErrorWebCam}
+          <Scanner
             onScan={handleScanWebCam}
-            // onScan={(() => setTimeout(() => handleScanWebCam()), 500)}
-            cameraContainerStyle={{
-              width: 275,
-              borderWidth: 1,
-              borderColor: "white",
-              alignSelf: "center",
+            styles={{
+              container: { width: "400px", height: "400px" },
             }}
-            cameraStyle={{ width: "97%", alignSelf: "center" }}
-            // legacyMode
+            scanDelay={300}
           />
           {/* <h3>Scanned By WebCam Code: {scanResultWebCam}</h3> */}
         </div>

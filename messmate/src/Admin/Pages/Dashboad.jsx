@@ -28,7 +28,6 @@ function Dashboad() {
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
-  console.log(data1);
 
   useEffect(() => {
     const getData = async (e) => {
@@ -38,11 +37,8 @@ function Dashboad() {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setData(response.data);
-        // console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -56,11 +52,8 @@ function Dashboad() {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setData1(response.data);
-        // console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -74,11 +67,8 @@ function Dashboad() {
           withCredentials: true,
         });
 
-        console.log("Get All User", response.data);
         setData3(response.data);
-        // console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -92,11 +82,8 @@ function Dashboad() {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setData2(response.data);
-        // console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 

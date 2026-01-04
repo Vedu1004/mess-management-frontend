@@ -5,7 +5,6 @@ const MultiSelect = ({ thing, setMenu, Menu }) => {
   const [tag1, setTag1] = useState("");
 
   const addOption = () => {
-    console.log("not add space in this area");
     // setList1((prev) => [...prev, tag1]);
     setMenu(() => [...Menu, tag1]);
     setTag1("");

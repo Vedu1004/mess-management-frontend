@@ -20,11 +20,8 @@ const TodayStudent = () => {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setUsers(response.data);
-        console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -33,7 +30,6 @@ const TodayStudent = () => {
 
   const handlePayment = async (userId, planId) => {
     try {
-      console.log(userId, planId);
       const response = await axios.patch(
         `userplan/updateUserPlan`,
         JSON.stringify({ userId, planId }),
@@ -42,14 +38,10 @@ const TodayStudent = () => {
           withCredentials: true,
         }
       );
-      console.log("See daily entry");
-      console.log(response.data);
       setAlert(true);
     } catch (error) {
       if (!error?.response) {
-        console.log("No Server Response");
       } else {
-        console.log("Deletion Failed");
       }
     }
   };

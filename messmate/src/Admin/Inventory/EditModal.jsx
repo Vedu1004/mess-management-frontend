@@ -21,7 +21,6 @@ function EditModal(props) {
   useEffect(() => {
     const getData = async (inventoryId) => {
       // if button enabled with JS hack
-      //   console.log("Inside effect", userEmail);
       try {
         const response = await axios.get(
           `/inventory/getinventory/${inventoryId}`,
@@ -30,15 +29,12 @@ function EditModal(props) {
           }
         );
 
-        // console.log("Get All User", response.data);
         setName(response.data.name);
         setStoreType(response.data.storeType);
         setQty(response.data.qty);
         // setUsedQty(response.data.usedqty);
         setSingle_Price(response.data.single_price);
-        console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -53,7 +49,6 @@ function EditModal(props) {
     const e2 = name === null;
     const e3 = qty > 0;
     const e4 = single_price > 0;
-    console.log(storeType);
     if (e1 || e2 || !e3 || !e4) {
       setalert({
         mode: true,
@@ -72,7 +67,6 @@ function EditModal(props) {
         }
       );
 
-      console.log(response);
       setalert({
         mode: true,
         message: "Inventory Updated successfully",

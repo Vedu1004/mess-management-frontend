@@ -20,14 +20,12 @@ function Contact() {
       )
       .then(
         (result) => {
-          console.log(result.text);
           setEmailDone(true);
           setName("");
           setEmail("");
           setQuery("");
         },
         (error) => {
-          console.log(error.text);
         }
       );
   };

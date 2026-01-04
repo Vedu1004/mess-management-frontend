@@ -33,14 +33,12 @@ const UserMenu = () => {
           setMenuS(null);
           setIsMenuAvlbl(false);
         }
-        console.log(response.data);
         // alert(response.data.message);
       } catch (err) {
         setMenuB([]);
         setMenuL([]);
         setMenuD([]);
         setMenuS([]);
-        console.log(err);
       }
     };
 

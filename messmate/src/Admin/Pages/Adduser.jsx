@@ -71,8 +71,6 @@ const Adduser = () => {
         }
       );
 
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response))
       setSuccess(true);
 
       //clear state and controlled inputs

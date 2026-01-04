@@ -1,7 +1,6 @@
 import React from "react";
 
 function Alert({ alert, setalert }) {
-  console.log(alert);
   return (
     <div
       className={` hidden w-full items-center text-white  ${alert.type} p-3 max-w-[100%] rounded-lg text-black text-lg mt-2 mb-4  text-warning-800 data-[te-alert-show]:inline-flex`}

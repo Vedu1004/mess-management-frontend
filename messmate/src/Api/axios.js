@@ -1,5 +1,7 @@
 import axios from "axios";
-const BASE_URL = "https://mess-management-for-universities.onrender.com";
+
+// Use environment variable or fallback to localhost for development
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 export default axios.create({
   baseURL: BASE_URL,

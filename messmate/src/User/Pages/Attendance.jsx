@@ -59,8 +59,6 @@ const Attendance = () => {
     .year(end.year)
     .format();
 
-  // console.log("starting page date ", start_date_page);
-  // console.log("ending page date ", end_date_page);
 
   // get array of dates of this page
   var arr = getDatesInRange(new Date(start_date_page), new Date(end_date_page));
@@ -85,14 +83,11 @@ const Attendance = () => {
           withCredentials: true,
         });
 
-        // console.log("Entry ", response.data.attendance);
         setEntry(response.data.attendance);
       } catch (err) {
-        console.log(err);
       }
     };
 
-    // console.log("Fetching user entry data");
     getData();
   }, []);
 
@@ -109,10 +104,8 @@ const Attendance = () => {
           }
         );
         
-        // console.log("Curr Plan ",dayjs(planResponse.data.start_date).get("date"));
         const curr_start = dayjs(planResponse.data.start_date);
         const curr_end = dayjs(planResponse.data.end_date);
-        console.log("Curr Plan ", planResponse.data);
         setStart({
           date: curr_start.get("date"),
           month: curr_start.get("month"),
@@ -127,15 +120,12 @@ const Attendance = () => {
         setCurrPlan(planResponse.data);
       } catch (error) {}
     };
-    // console.log("Fetching current plan data");
     getCurrentPlan();
   }, []);
 
   const setConsent = (item) => {
-    console.log("item", item);
     setConsentDate(item);
     setConsentModal(true);
-    // console.log("item", consentDate);
   };
   var bg_big = "bg-gray-100";
   var bg = "bg-red-500";
@@ -176,8 +166,6 @@ const Attendance = () => {
     } else {
       consent = false;
     }
-    // console.log(check >= from && check <= to);
-    // console.log("Entry ", entry);
     var breakfast = false;
     var lunch = false;
     var dinner = false;
@@ -300,7 +288,6 @@ const Attendance = () => {
       });
     }
     // const currentyearandmonth = dayjs().month(monthyear.month).year(monthyear.year).add(2,'month')
-    // console.log(currentyearandmonth);
   };
 
   const decrement = () => {

@@ -14,7 +14,7 @@ const PersistentLogin = () => {
             try {
                 await refresh()
             } catch (error) {
-                console.log(error);
+                // Silent fail - user not logged in
             }
             finally
             {

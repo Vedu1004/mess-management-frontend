@@ -20,10 +20,7 @@ const ProfileScanner = () => {
             withCredentials: true,
           }
         );
-        console.log("hello this is today plan");
-        console.log(planResponse.data);
 
-        console.log(planResponse.data[0].isavailable[0].dinner);
         const isTodayBreakfast = planResponse.data[0].isavailable[0].breakfast;
         const isTodayLunch = planResponse.data[0].isavailable[0].lunch;
         const isTodayDinner = planResponse.data[0].isavailable[0].dinner;
@@ -46,12 +43,10 @@ const ProfileScanner = () => {
             isTodayLunch: "",
             isTodayDinner: "",
           };
-          console.log(planDataObject);
         }
 
         setPlan(planDataObject);
       } catch (error) {
-        console.log(error);
       }
     };
     getCurrentPlan();
@@ -70,14 +65,11 @@ const ProfileScanner = () => {
         isTodayLunch: plan.isTodayLunch,
         isTodayDinner: plan.isTodayDinner,
       });
-      //   console.log(auth);
-      console.log(dataObject);
 
       try {
         const response = await QRCode.toDataURL(dataObject);
         setImageUrl(response);
       } catch (error) {
-        console.log(error);
       }
     };
 

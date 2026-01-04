@@ -20,10 +20,8 @@ const AllPlanTable = () => {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setUsers(response.data);
       } catch (err) {
-        console.log(err);
       }
     };
     const getUserData = async (e) => {
@@ -34,7 +32,6 @@ const AllPlanTable = () => {
         });
         setuserName(response.data);
       } catch (err) {
-        console.log(err);
       }
     };
     getUserData()
@@ -43,7 +40,6 @@ const AllPlanTable = () => {
 
   const handlePayment = async (userId, planId) => {
     try {
-      console.log(userId, planId);
       const response = await axios.patch(
         `userplan/updateUserPlan`,
         JSON.stringify({ userId, planId }),
@@ -52,14 +48,10 @@ const AllPlanTable = () => {
           withCredentials: true,
         }
       );
-      console.log("See daily entry");
-      console.log(response.data);
       setAlert(true);
     } catch (error) {
       if (!error?.response) {
-        console.log("No Server Response");
       } else {
-        console.log("Deletion Failed");
       }
     }
   };

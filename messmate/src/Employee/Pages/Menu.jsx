@@ -37,14 +37,12 @@ const Menu = () => {
         setMenuL(response.data.menu[0].menu_lunch);
         setMenuD(response.data.menu[0].menu_dinner);
         setMenuS(response.data.menu[0].special_menu);
-        console.log(response.data);
         // alert(response.data.message);
       } catch (err) {
         setMenuB([]);
         setMenuL([]);
         setMenuD([]);
         setMenuS([]);
-        console.log(err);
       }
     };
 
@@ -80,7 +78,6 @@ const Menu = () => {
     const l2 = menuL.length > 0;
     const l3 = menuD.length > 0;
     // if (!l1 || !l2 || !l3) {
-    // console.log(
     // "Breakfast Lunch and Dinner atleat have one value if not than write None"
     // );
     // return;
@@ -101,9 +98,7 @@ const Menu = () => {
         }
       );
 
-      console.log(JSON.stringify(response?.data));
       // const message = response.data.message;
-      // console.log(response.data);
       //clear state and controlled inputs
       setDay("");
       setMenuB([]);
@@ -144,7 +139,6 @@ const Menu = () => {
     // e.preventDefault();
     // if button enabled with JS hack
     if (!price || !desc) {
-      console.log("Price and Description must contain some things");
       return;
     }
     try {
@@ -161,7 +155,6 @@ const Menu = () => {
         }
       );
 
-      console.log(JSON.stringify(response?.data));
       setalert({
         mode: true,
         message: "Plan Updated",

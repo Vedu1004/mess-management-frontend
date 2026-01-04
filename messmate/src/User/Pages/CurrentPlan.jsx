@@ -26,9 +26,7 @@ const CurrentPlan = ({ planDetail, plan_id }) => {
           withCredentials: true,
         });
 
-        // console.log(response.data.plan[0]);
         setPlan(response.data.plan[0]);
-        console.log("plan", plan);
         // alert(response.data.message);
       } catch (err) {
         alert(err);

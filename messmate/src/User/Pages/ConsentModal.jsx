@@ -25,28 +25,20 @@ function ConsentModal(props) {
   useEffect(() => {
     const getData = async (consentDate) => {
       // if button enabled with JS hack
-      console.log(props.userId);
-      console.log(props.planId);
-      console.log(props.consentDate);
       const obj = JSON.stringify({
         userId: props.userId,
         planId: props.planId,
         date: props.consentDate,
       });
-      // console.log(props);
-      //   console.log("Inside effect", userEmail);
       try {
         const response = await axiosPrivate.get(`/userplan/getConsent/${obj}`);
 
-        console.log(response);
         setData(response.data);
         setBreakfast(response.data.isavailable[0].breakfast);
-        // console.log(response.data.isavailable[0].breakfast);
         setLunch(response.data.isavailable[0].lunch);
         setDate(response.data.isavailable[0].date);
         setDinner(response.data.isavailable[0].dinner);
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -54,10 +46,7 @@ function ConsentModal(props) {
   }, []);
 
   const updateConsent = async () => {
-    console.log('hgfgfhffj')
     try {
-      console.log("inside update");
-      console.log(date);
       const response = await axios.patch(
         "/userplan/updateConsent",
         JSON.stringify({
@@ -74,12 +63,9 @@ function ConsentModal(props) {
         }
       );
 
-      // console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response))
       // setSuccess(true);
 
       //clear state and controlled inputs
-      console.log(response);
       //   props.setEditmodal(false);
     } catch (err) {
       setalert({

@@ -28,11 +28,8 @@ function StoreA(props) {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setInventory(response.data);
-        //console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -41,7 +38,6 @@ function StoreA(props) {
 
   const handleDelete = async (inventoryId) => {
     try {
-      // console.log(email);
       const response = await axios.delete(
         `inventory/deleteinventory/${inventoryId}`,
         {
@@ -56,9 +52,7 @@ function StoreA(props) {
       });
     } catch (error) {
       if (!error?.response) {
-        console.log("No Server Response");
       } else {
-        console.log("Deletion Failed");
       }
     }
   };
@@ -129,7 +123,6 @@ function StoreA(props) {
         </tr>
       );
     });
-  // console.log(content)
   // const searchintable = (e) => {
   //   setSearch(e.target.value);
   //   setInventory(inventory.filter((item) =>{

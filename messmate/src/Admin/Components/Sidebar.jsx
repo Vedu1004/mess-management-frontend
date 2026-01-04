@@ -30,7 +30,6 @@ function Sidebar() {
   const active7 =
     Location.pathname === "/admin/alluser" ? `${activecolor}` : "";
 
-  console.log(Location);
   const logout = useLogout();
   return (
     <div className="min-h-[100vh] w-[16rem]  my-2 ml-3 rounded-2xl" style={{backgroundColor:'peachpuff'}}>

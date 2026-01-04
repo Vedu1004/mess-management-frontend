@@ -23,12 +23,10 @@ const Subscription = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data);
         if (response.data) {
           setCurrentPlan(response.data);
           setIsCurrentPlan(true);
         }
-        // console.log(currentPlan);
         // alert(response.data.message);
       } catch (err) {
         alert(err);
@@ -47,7 +45,6 @@ const Subscription = () => {
         });
 
         setPlans(response.data);
-        // console.log(plans);
         // alert(response.data.message);
       } catch (err) {
         alert(err);
@@ -60,9 +57,6 @@ const Subscription = () => {
   const takeSubscription = async (fees, planId) => {
     // e.preventDefault();
     const userId = auth.userId;
-    console.log(userId);
-    console.log(fees);
-    console.log(planId);
 
     try {
       const response = await axios.post(
@@ -74,7 +68,6 @@ const Subscription = () => {
         }
       );
 
-      console.log(JSON.stringify(response?.data));
       // setplan_Id(planId);
       // setIsCurrentPlan(true);
       navigate("/user", { replace: true });

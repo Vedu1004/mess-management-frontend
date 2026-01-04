@@ -46,15 +46,12 @@ function Modal({ setLoginmodal }) {
   // handling submit
   const handleReset = async (e) => {
     e.preventDefault();
-    // console.log(email);
 
     // if button enabled with JS hack
     const e1 = Email_Checker.test(email);
     // const e2 = validPassword;
-    // console.log(e1, e2);
     if (!e1) {
       // setErrMsg("Invalid Entry");
-      // console.log(errMsg);
       setalert({
         mode: true,
         message: "Invalid Entry",
@@ -63,7 +60,6 @@ function Modal({ setLoginmodal }) {
       return;
     }
     try {
-      // console.log("Inside try block");
       const response = await axios.patch(
         "/users/resetpasswd",
         JSON.stringify({ email, oldpassword, newpassword }),
@@ -77,7 +73,6 @@ function Modal({ setLoginmodal }) {
       setoldPassword("");
       setnewPassword("");
       setReset(false);
-      console.log(response);
       if (response.data) {
         setalert({
           mode: true,
@@ -89,44 +84,63 @@ function Modal({ setLoginmodal }) {
       if (!err?.response) {
         setalert({
           mode: true,
-          message: "No server Responce ",
-          type: "bg-[red]",
+          message: "No server response. Please check your connection.",
+          type: "bg-red-500",
         });
       } else if (err.response?.status === 409) {
         setalert({
           mode: true,
-          message: "User not available",
-          type: "bg-[red]",
+          message: "User not found. Please check your email.",
+          type: "bg-red-500",
+        });
+      } else if (err.response?.status === 401) {
+        setalert({
+          mode: true,
+          message: "Old password is incorrect.",
+          type: "bg-red-500",
         });
       } else {
         setalert({
           mode: true,
-          message: "User Not Found",
-          type: "bg-[red]",
+          message: err.response?.data?.message || "Password reset failed.",
+          type: "bg-red-500",
         });
       }
     }
   };
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(email);
 
-    // if button enabled with JS hack
-    const e1 = Email_Checker.test(email);
-    const e2 = validPassword;
-    console.log(e1, e2);
-    if (!e1 || !e2) {
-      // setErrMsg("Invalid Entry");
-      console.log(errMsg);
+    // Validate inputs before API call
+    const isValidEmail = Email_Checker.test(email);
+
+    if (!email) {
       setalert({
         mode: true,
-        message: "Invalid Entry",
-        type: "bg-[red]",
+        message: "Please enter your email address.",
+        type: "bg-orange-400",
+      });
+      return;
+    }
+
+    if (!isValidEmail) {
+      setalert({
+        mode: true,
+        message: "Please enter a valid email address.",
+        type: "bg-orange-400",
+      });
+      return;
+    }
+
+    if (!password) {
+      setalert({
+        mode: true,
+        message: "Please enter your password.",
+        type: "bg-orange-400",
       });
       return;
     }
     try {
-      console.log("Inside try block");
       const response = await axios.post(
         "/auth/login",
         JSON.stringify({ email, password }),
@@ -135,9 +149,6 @@ function Modal({ setLoginmodal }) {
           withCredentials: true,
         }
       );
-      console.log("After request", response);
-
-      console.log(JSON.stringify(response?.data));
       const userId = response.data.userId;
       const name = response.data.name;
       const newEmail = response.data.email;
@@ -166,20 +177,41 @@ function Modal({ setLoginmodal }) {
       if (!err?.response) {
         setalert({
           mode: true,
-          message: "No server Responce ",
-          type: "bg-orange-400",
+          message: "No server response. Please check your connection.",
+          type: "bg-red-500",
         });
-      } else if (err.response?.status === 409) {
+      } else if (err.response?.status === 400) {
         setalert({
           mode: true,
-          message: "User not available",
+          message: "Please fill in all fields",
           type: "bg-orange-400",
         });
+      } else if (err.response?.status === 401) {
+        const serverMessage = err.response?.data?.message;
+        if (serverMessage === "User not available") {
+          setalert({
+            mode: true,
+            message: "User not found. Please check your email.",
+            type: "bg-red-500",
+          });
+        } else if (serverMessage === "Unauthorized") {
+          setalert({
+            mode: true,
+            message: "Incorrect password. Please try again.",
+            type: "bg-red-500",
+          });
+        } else {
+          setalert({
+            mode: true,
+            message: serverMessage || "Login failed. Please try again.",
+            type: "bg-red-500",
+          });
+        }
       } else {
         setalert({
           mode: true,
-          message: "User Not Found",
-          type: "bg-orange-400",
+          message: err.response?.data?.message || "Something went wrong",
+          type: "bg-red-500",
         });
       }
     }

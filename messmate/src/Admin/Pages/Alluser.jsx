@@ -31,11 +31,8 @@ function Alluser() {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setUsers(response.data);
-        console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -44,7 +41,6 @@ function Alluser() {
 
   const handleDelete = async (email) => {
     try {
-      console.log(email);
       const response = await axios.delete(
         `users/delete/${email}`,
         JSON.stringify({ email }),
@@ -53,19 +49,14 @@ function Alluser() {
           withCredentials: true,
         }
       );
-      console.log(response);
     } catch (error) {
       if (!error?.response) {
-        console.log("No Server Response");
       } else {
-        console.log("Deletion Failed");
       }
     }
   };
   const handleEdit = (email) => {
-    console.log("Handle edit ", email);
     setUserEmail(email);
-    console.log("Handle edit ", userEmail);
     setEditModal(true);
   };
 
@@ -134,7 +125,6 @@ function Alluser() {
         </tr>
       );
     });
-  // console.log(content)
   // const searchintable = (e) => {
   //   setSearch(e.target.value);
   //   setUsers(users.filter((item) =>{

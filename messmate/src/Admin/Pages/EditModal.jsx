@@ -45,21 +45,17 @@ function EditModal(props) {
   useEffect(() => {
     const getData = async (userEmail) => {
       // if button enabled with JS hack
-      console.log("Inside effect", userEmail);
       try {
         const response = await axios.get(`/users/getuser/${userEmail}`, {
           withCredentials: true,
         });
 
-        // console.log("Get All User", response.data);
         setName(response.data.name);
         setEmail(response.data.email);
         setMobileNo(response.data.mobileno);
         setId(response.data.userId);
         setRole(response.data.role);
-        console.log(JSON.stringify(response));
       } catch (err) {
-        console.log(err);
       }
     };
 
@@ -69,7 +65,6 @@ function EditModal(props) {
   // handling submit
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log("inside update");
     // if button enabled with JS hack
     const e1 = Email_Checker.test(email);
     if (!e1) {
@@ -86,8 +81,6 @@ function EditModal(props) {
         }
       );
 
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response))
       setSuccess(true);
 
       //clear state and controlled inputs

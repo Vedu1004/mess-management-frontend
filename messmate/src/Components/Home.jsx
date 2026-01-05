@@ -1,5 +1,5 @@
 import React from "react";
-import homePng from "../Svg/food home1.jpeg"
+import homePng from "../Svg/homebg.jpg"
 const Home = () => {
   return (
   <>
